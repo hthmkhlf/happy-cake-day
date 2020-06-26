@@ -2,7 +2,6 @@ import praw
 import sqlite3
 
 
-# CREATE TABLE users (
-#     id TEXT PRIMARY KEY,
-#     comment_id TEXT,
-# )
+reddit = praw.Reddit("cakeBot", user_agent="Cake bot user agent")
+subreddit = reddit.subreddit("all")
+
