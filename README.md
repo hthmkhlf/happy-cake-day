@@ -6,7 +6,8 @@ Bot that wishes Reddit users "Happy Cake Day"
 Using praw's streams functionality to get comments in real time from r/all using ```subreddit.stream.comments():``` will solve us the problem of dealing with a while loop.
     
 > The main.py file will take care of :
-* checking if the user is celebrating their cake day (using ```created_utc``` we can determine if the user is celebrating their cake day Note: epoch time is used)        
+* checking if the user is celebrating their cake day (using ```created_utc``` we can determine if the user is celebrating their cake day Note: epoch time is used)
+* User need to be at least one year old due to the fact that if I create a new account today it is technichally my cake day.      
 * Make sure the user's comment is not on an Adult sub as we don't want our bot to have activity on adult subs.
 * Add the user to the cake database and add the comment as well as we will use that later to reply back to the user.
 
@@ -19,6 +20,8 @@ Using praw's streams functionality to get comments in real time from r/all using
 
 > Cleaning script will take care of:
 * Flushing the database, flushing here means removing all the user which their cake day is done once the time_added in the DB is > 24
+  
+
 ## Todo
 
 - [ ] Track user comments and posts in the past year
