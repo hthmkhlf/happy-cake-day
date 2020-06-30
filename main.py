@@ -34,7 +34,7 @@ def isCake(user:str,submission:str):
 
 def main():
     for comment in subreddit.stream.comments():
-        if 
+        if user 
         print(comment.subreddit )
 
 
