@@ -25,7 +25,7 @@ Using praw's streams functionality to get comments in real time from r/all using
 ## Todo
 
 - [ ] Track user comments and posts in the past year
-- [ ] Check if the user is on cake day
+- [X] Check if the user is on cake day
 - [ ] Dropping the users that we already wished Happy cake day
 - [ ] Handle Sqlite errors and make sure the database does not get locked 
 - [ ] Handle Praw errors and HTTP 403 errors

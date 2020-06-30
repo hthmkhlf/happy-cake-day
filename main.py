@@ -2,6 +2,7 @@ import praw
 import sqlite3
 import logging
 from time import  gmtime ,strftime
+from datetime import datetime, date
 
 
 #Reddit stuff
@@ -34,10 +35,21 @@ def isCake(user:str,submission:str):
 
 def main():
     for comment in subreddit.stream.comments():
-        if user 
-        print(comment.subreddit )
+        # if comment.subreddit.over18 == False:
+        #Date variables
+        cur_date = date.today()
+        cur_day = cur_date.day
+        cur_month = cur_date.month
+        user_created = datetime.fromtimestamp(comment.author.created_utc).date()
+        user_cake_day = user_created.day
+        user_cake_month = user_created.month
+        # Check if the user is on cake day
+        if (cur_day == user_cake_day) and (cur_month == user_cake_month) and (cur_date.year != user_created.year) :
+            print(f"Happy cake day {comment.author}")
+        else:
+            print(f"No cake today: {cur_day} : {user_cake_day} -- {cur_month} : {user_cake_month} -- {cur_date.year} : {user_created.year}")
+        
 
 
 if __name__ == "__main__":
     main()
-    # pass
