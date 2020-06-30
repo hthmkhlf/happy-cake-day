@@ -5,20 +5,20 @@ Bot that wishes Reddit users "Happy Cake Day"
 
 Using praw's streams functionality to get comments in real time from r/all using ```subreddit.stream.comments():``` will solve us the problem of dealing with a while loop.
     
->The main.py file will take care of :
-        * checking if the user is celebrating their cake day (using ```created_utc``` we can determine if the user is celebrating their cake day Note: epoch time is used)
-        * Make sure the user's comment is not on an Adult sub as we don't want our bot to have activity on adult subs.
-        * Add the user to the cake database and add the comment as well as we will use that later to reply back to the user.
+> The main.py file will take care of :
+* checking if the user is celebrating their cake day (using ```created_utc``` we can determine if the user is celebrating their cake day Note: epoch time is used)        
+* Make sure the user's comment is not on an Adult sub as we don't want our bot to have activity on adult subs.
+* Add the user to the cake database and add the comment as well as we will use that later to reply back to the user.
 
- >The wishCake.py will take care of :
-        * Getting the total comment/posts Karma points the user earned in the past year.
-        * Highlight their most upvoted comment/post.
-        * reply back with the data gathered and wish them happy cake day.
-        * The 'wished' column on the db will be set to 1 so we make sure we only wish happy cake day once to avoid spamming the user.
+> The wishCake.py will take care of :
+* Getting the total comment/posts Karma points the user earned in the past year.
+* Highlight their most upvoted comment/post.
+* reply back with the data gathered and wish them happy cake day.
+* The 'wished' column on the db will be set to 1 so we make sure we only wish happy cake day once to avoid spamming the user.
 
 
->Cleaning script will take care of:
-        * Flushing the database, flushing here means removing all the user which their cake day is done once the time_added in the DB is > 24
+> Cleaning script will take care of:
+* Flushing the database, flushing here means removing all the user which their cake day is done once the time_added in the DB is > 24
 ## Todo
 
 - [ ] Track user comments and posts in the past year
