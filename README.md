@@ -1,4 +1,4 @@
-# happy-cake-day
+# happy-cake-day 🍰🎂🧁
 Bot that wishes Reddit users "Happy Cake Day"
 
 ## Concept 
@@ -35,3 +35,6 @@ Using praw's streams functionality to get comments in real time from r/all using
 
 ## Track top comments and top post 
   * Simply create two new lists one for a comment and one for a post as we are only tracking comments on SFW subs we will simply check if the comment/post we are at has a higher score if so we replace it and move on.  
+
+## Forking and contribution 🎳
+Feel free to contribute as much as you want. If you plan on forking this project remember to create a new [praw.ini file](https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html?highlight=praw.ini)
