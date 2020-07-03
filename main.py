@@ -13,7 +13,14 @@ subreddit = reddit.subreddit("all")
 db_conn = sqlite3.connect('cake.db')
 
 #Create Logging file to track the database
-logging.basicConfig(filename='dberr.log',level=logging.DEBUG)
+logger  = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+fh = logging.FileHandler('learn.log')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+
+
 
 #Add the user to the database if they are not on its
 def isCake(user:str,submission:str):
@@ -24,11 +31,12 @@ def isCake(user:str,submission:str):
         db_cur.execute(find_user,(user,))
         result = db_cur.fetchone()
         if not result:
-            db_cur.execute(add_user,(user,submission,))
+            db_cur.execute(add_user,(str(user),str(submission),))
+            logger.debug('User was added to the database')
             db_conn.commit()
-            db_conn.close()
     except sqlite3.Error as e:
-        logging.exception("Error occured on the isCake function", exc_info=True)
+        logger.critical(f"User was:{user}, submission was: {submission}")
+        logger.error(e, exc_info=True)
     
 
 
@@ -44,10 +52,12 @@ def main():
         user_cake_day = user_created.day
         user_cake_month = user_created.month
         # Check if the user is on cake day
-        if (cur_day == user_cake_day) and (cur_month == user_cake_month) and (cur_date.year != user_created.year) :
-            print(f"Happy cake day {comment.author}")
+        if (cur_day == user_cake_day) and (cur_month == user_cake_month) and (cur_date.year != user_created.year) and (comment.subreddit.over18 == False):
+            isCake(comment.author, comment.id)
+            # print(f"Happy cake day 🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂 {comment.author}")
         else:
-            print(f"No cake today: {cur_day} : {user_cake_day} -- {cur_month} : {user_cake_month} -- {cur_date.year} : {user_created.year}")
+            # print(f"{comment.author} are not celebrating their Cake Day")
+            isCake(str(comment.author), str(comment.id))
         
 
 

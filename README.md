@@ -24,11 +24,12 @@ Using praw's streams functionality to get comments in real time from r/all using
 
 ## Todo
 
-- [ ] Track user comments and posts in the past year
-- [X] Check if the user is on cake day
-- [ ] Dropping the users that we already wished Happy cake day
-- [ ] Handle Sqlite errors and make sure the database does not get locked 
-- [ ] Handle Praw errors and HTTP 403 errors
+- [X] Check if the user is on cake day.
+- [ ] Track user comments and posts in the past year.
+- [ ] Dropping the users that we already wished Happy cake day.
+- [ ] Handle Sqlite errors and make sure the database does not get locked.
+- [ ] Handle Praw errors and HTTP 403 errors.
+- [ ] Use python built-in loggins to log errors.
 
 
 ## Keep an eye on
@@ -41,3 +42,5 @@ Using praw's streams functionality to get comments in real time from r/all using
 
 ## Forking and contribution 🎳
 Feel free to contribute as much as you want. If you plan on forking this project remember to create a new [praw.ini file](https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html?highlight=praw.ini)
+
+
