@@ -1,5 +1,7 @@
 import praw
+import prawcore
 import sqlite3
+import time
 import logging
 from time import  gmtime ,strftime
 from datetime import datetime, date
@@ -28,7 +30,7 @@ def isCake(user:str,submission:str):
     find_user = "Select userId FROM cake_users where userID=?"
     add_user = "INSERT INTO cake_users(userID,pubID) VALUES(?,?)"
     try:
-        db_cur.execute(find_user,(user,))
+        db_cur.execute(find_user,(str(user),))
         result = db_cur.fetchone()
         if not result:
             db_cur.execute(add_user,(str(user),str(submission),))
@@ -42,22 +44,30 @@ def isCake(user:str,submission:str):
 
 
 def main():
-    for comment in subreddit.stream.comments():
-        # if comment.subreddit.over18 == False:
-        #Date variables
-        cur_date = date.today()
-        cur_day = cur_date.day
-        cur_month = cur_date.month
-        user_created = datetime.fromtimestamp(comment.author.created_utc).date()
-        user_cake_day = user_created.day
-        user_cake_month = user_created.month
-        # Check if the user is on cake day
-        if (cur_day == user_cake_day) and (cur_month == user_cake_month) and (cur_date.year != user_created.year) and (comment.subreddit.over18 == False):
-            isCake(comment.author, comment.id)
-            # print(f"Happy cake day 🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂 {comment.author}")
-        else:
-            # print(f"{comment.author} are not celebrating their Cake Day")
-            isCake(str(comment.author), str(comment.id))
+    try:
+        for comment in subreddit.stream.comments():
+            # if comment.subreddit.over18 == False:
+            #Date variables
+            cur_date = date.today()
+            cur_day = cur_date.day
+            cur_month = cur_date.month
+            user_created = datetime.fromtimestamp(comment.author.created_utc).date()
+            user_cake_day = user_created.day
+            user_cake_month = user_created.month
+            # Check if the user is on cake day
+            if (cur_day == user_cake_day) and (cur_month == user_cake_month) and (cur_date.year != user_created.year) and (comment.subreddit.over18 == False):
+                isCake(comment.author, comment.id)
+                # print(f"Happy cake day 🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂🎂 {comment.author}")
+            else:
+                # print(f"{comment.author} are not celebrating their Cake Day")
+                isCake(str(comment.author), str(comment.id))
+    except prawcore.exceptions.NotFound as e:
+        logger.error(e, exc_info=True)
+        time.sleep(10)
+        main()
+            
+
+
         
 
 
